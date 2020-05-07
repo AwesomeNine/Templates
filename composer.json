@@ -25,7 +25,8 @@
 	},
 	"autoload": {
 		"psr-4" : {
-			"Awesome9\\Filesystem\\" : "src"
-		}
+			"Awesome9\\Templates\\" : "src"
+		},
+		"classmap" : [ "src/" ]
 	}
 }
