@@ -12,7 +12,7 @@
 
 ## 📃 About Template
 
-This package is a utility to ease the loading of templates intended to be used within a plugin or theme and also provide template system like WooCommerce.
+This package provides ease of loading templates intended to be used within a plugin or theme and also provide a template system like WooCommerce.
 
 The inspiration for the package comes from [Templates micropackage](https://github.com/micropackage/templates).
 
@@ -96,7 +96,7 @@ some-theme/
 │   └── settings.php
 ```
 
-In this case we set both plugin and theme folder name for templates lookup.
+In this case, we set both plugin and theme folder name for template lookup.
 
 ```php
 Awesome9\Templates\Storage::get()->set_for_theme( 'templates', 'my-plugin' );
