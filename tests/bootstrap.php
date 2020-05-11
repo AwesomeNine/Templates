@@ -2,7 +2,9 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Awesome9\Filesystem
+ * @since   1.0.0
+ * @package Awesome9\Templates
+ * @author  Awesome9 <me@awesome9.co>
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
