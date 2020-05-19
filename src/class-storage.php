@@ -35,7 +35,7 @@ class Storage {
 	 *
 	 * @var array
 	 */
-	private $storages = [];
+	private $storages = array();
 
 	/**
 	 * Retrieve main Storage instance.

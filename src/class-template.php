@@ -36,7 +36,7 @@ class Template {
 	 *
 	 * @var array
 	 */
-	private $vars = [];
+	private $vars = array();
 
 	/**
 	 * Start locating from theme folder.
@@ -151,7 +151,7 @@ class Template {
 	 * @param  mixed  $default  Template var default value.
 	 */
 	public function the( $var_name, $default = null ) {
-		echo (string) $this->get( $var_name, $default );
+		echo (string) $this->get( $var_name, $default ); // phpcs:ignore
 	}
 
 	/**
@@ -206,7 +206,7 @@ class Template {
 	 * @return Template
 	 */
 	public function clear_vars() {
-		$this->vars = [];
+		$this->vars = array();
 		return $this;
 	}
 
@@ -222,8 +222,8 @@ class Template {
 			throw new TemplateException( sprintf( 'Template file "%s" does not exist', $this->get_path() ) );
 		}
 
-		$get = \Closure::fromCallable( [ $this, 'get' ] );
-		$the = \Closure::fromCallable( [ $this, 'the' ] );
+		$get = \Closure::fromCallable( array( $this, 'get' ) );
+		$the = \Closure::fromCallable( array( $this, 'the' ) );
 
 		include $this->get_path();
 	}
