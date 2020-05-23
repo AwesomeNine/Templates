@@ -42,6 +42,8 @@ class Storage {
 	 *
 	 * Ensure only one instance is loaded or can be loaded.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return Storage
 	 */
 	public static function get() {
@@ -84,6 +86,8 @@ class Storage {
 
 	/**
 	 * Set plugin template folder with theme folder priority.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param  string $plugin_folder Plugin folder for templates.
 	 * @param  string $theme_folder  Theme folder for templates.
@@ -130,6 +134,8 @@ class Storage {
 
 	/**
 	 * Is storage exists.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param  string $name Storage reference name.
 	 * @return bool

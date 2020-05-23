@@ -19,6 +19,9 @@
 		"psr-4" : {
 			"Awesome9\\Templates\\" : "src"
 		},
+		"files": [
+			"src/functions.php"
+		],
 		"classmap" : [ "src/" ]
 	}
 }
