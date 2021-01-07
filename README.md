@@ -1,5 +1,6 @@
 # Template
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d20643c660874a8cb7b1398fca1d93bf)](https://app.codacy.com/gh/AwesomeNine/Templates?utm_source=github.com&utm_medium=referral&utm_content=AwesomeNine/Templates&utm_campaign=Badge_Grade)
 [![Awesome9](https://img.shields.io/badge/Awesome-9-brightgreen)](https://awesome9.co)
 [![Latest Stable Version](https://poser.pugx.org/awesome9/templates/v/stable)](https://packagist.org/packages/awesome9/templates)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/awesome9/templates.svg)](https://packagist.org/packages/awesome9/templates)
