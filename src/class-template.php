@@ -134,14 +134,20 @@ class Template {
 	}
 
 	/**
-	 * Gets all template variables
+	 * Gets template var value
 	 *
 	 * @since  1.0.0
 	 *
-	 * @return array
+	 * @param  string $var_name Template var name.
+	 * @param  mixed  $default  Template var default value.
+	 * @return mixed|null       Null if var not set.
 	 */
-	public function get_vars() {
-		return $this->vars;
+	public function get( $var_name, $default = null ) {
+		if ( isset( $this->vars[ $var_name ] ) ) {
+			return $this->vars[ $var_name ];
+		}
+
+		return $default;
 	}
 
 	/**
@@ -157,20 +163,26 @@ class Template {
 	}
 
 	/**
-	 * Gets template var value
+	 * Gets all template variables
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  string $var_name Template var name.
-	 * @param  mixed  $default  Template var default value.
-	 * @return mixed|null       Null if var not set.
+	 * @return array
 	 */
-	public function get( $var_name, $default = null ) {
-		if ( isset( $this->vars[ $var_name ] ) ) {
-			return $this->vars[ $var_name ];
-		}
+	public function get_vars() {
+		return $this->vars;
+	}
 
-		return $default;
+	/**
+	 * Clears all template variables
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return Template
+	 */
+	public function clear_vars() {
+		$this->vars = [];
+		return $this;
 	}
 
 	/**
@@ -201,31 +213,26 @@ class Template {
 	}
 
 	/**
-	 * Clears all template variables
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return Template
-	 */
-	public function clear_vars() {
-		$this->vars = [];
-		return $this;
-	}
-
-	/**
 	 * Renders the template
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws Template_Exception If teplate file does not exist.
+	 * @throws Template_Exception If template file does not exist.
 	 */
 	public function render() {
 		if ( ! $this->is_exists() ) {
 			throw new Template_Exception( sprintf( 'Template file "%s" does not exist', $this->get_path() ) );
 		}
 
-		$get = \Closure::fromCallable( [ $this, 'get' ] );
-		$the = \Closure::fromCallable( [ $this, 'the' ] );
+		$get_method = [ $this, 'get' ];
+		$get        = function () use ( $get_method ) {
+			return call_user_func_array( $get_method, func_get_args() );
+		};
+
+		$the_method = [ $this, 'the' ];
+		$the        = function () use ( $the_method ) {
+			return call_user_func_array( $the_method, func_get_args() );
+		};
 
 		include $this->get_path();
 	}
