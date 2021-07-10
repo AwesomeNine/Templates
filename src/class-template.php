@@ -9,8 +9,8 @@
 
 namespace Awesome9\Templates;
 
-use Awesome9\Templates\Exceptions\StorageException;
-use Awesome9\Templates\Exceptions\TemplateException;
+use Awesome9\Templates\Exceptions\Storage_Exception;
+use Awesome9\Templates\Exceptions\Template_Exception;
 
 /**
  * Template class
@@ -36,7 +36,7 @@ class Template {
 	 *
 	 * @var array
 	 */
-	private $vars = array();
+	private $vars = [];
 
 	/**
 	 * Start locating from theme folder.
@@ -50,28 +50,30 @@ class Template {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws StorageException  When storage wasn't found.
-	 * @throws TemplateException When variables is not an array.
+	 * @throws Storage_Exception  When storage wasn't found.
+	 * @throws Template_Exception When variables is not an array.
 	 *
 	 * @param  string $storage Storage name.
 	 * @param  string $name    Template name.
 	 * @param  array  $vars    Tempalte variables. Default: empty.
 	 * @return Template
 	 */
-	public function __construct( $storage, $name, $vars = array() ) {
+	public function __construct( $storage, $name, $vars = [] ) {
 		$this->storage = $storage;
 		$this->name    = $name;
 
 		if ( ! Storage::get()->is_exists( $storage ) ) {
-			throw new StorageException( sprintf( 'Storage %s wasn\'t found', $storage ) );
+			throw new Storage_Exception( sprintf( 'Storage %s wasn\'t found', $storage ) );
 		}
 
 		if ( ! is_array( $vars ) ) {
-			throw new TemplateException( sprintf( 'Template %s vars should be an array', $name ) );
+			throw new Template_Exception( sprintf( 'Template %s vars should be an array', $name ) );
 		}
 
 		$this->vars   = $vars;
 		$this->locate = 'templates' === $storage;
+
+		return $this;
 	}
 
 	/**
@@ -84,7 +86,7 @@ class Template {
 	public function __toString() {
 		try {
 			return $this->output();
-		} catch ( TemplateException $e ) {
+		} catch ( Template_Exception $e ) {
 			return $e->getMessage();
 		}
 	}
@@ -110,10 +112,10 @@ class Template {
 	public function get_path() {
 		if ( $this->locate ) {
 			return locate_template(
-				array(
+				[
 					Storage::get()->get_path( 'theme' ) . "{$this->name}.php",
 					Storage::get()->get_path( 'templates' ) . "{$this->name}.php",
-				)
+				]
 			);
 		}
 
@@ -206,7 +208,7 @@ class Template {
 	 * @return Template
 	 */
 	public function clear_vars() {
-		$this->vars = array();
+		$this->vars = [];
 		return $this;
 	}
 
@@ -215,15 +217,15 @@ class Template {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws TemplateException If teplate file does not exist.
+	 * @throws Template_Exception If teplate file does not exist.
 	 */
 	public function render() {
 		if ( ! $this->is_exists() ) {
-			throw new TemplateException( sprintf( 'Template file "%s" does not exist', $this->get_path() ) );
+			throw new Template_Exception( sprintf( 'Template file "%s" does not exist', $this->get_path() ) );
 		}
 
-		$get = \Closure::fromCallable( array( $this, 'get' ) );
-		$the = \Closure::fromCallable( array( $this, 'the' ) );
+		$get = \Closure::fromCallable( [ $this, 'get' ] );
+		$the = \Closure::fromCallable( [ $this, 'the' ] );
 
 		include $this->get_path();
 	}

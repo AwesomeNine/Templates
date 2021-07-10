@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateException class
+ * Template exception
  *
  * @since   1.0.0
  * @package Awesome9\Templates
@@ -10,6 +10,6 @@
 namespace Awesome9\Templates\Exceptions;
 
 /**
- * TemplateException class
+ * Template Exception class
  */
-class TemplateException extends \Exception {}
+class Template_Exception extends \Exception {}

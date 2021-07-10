@@ -18,7 +18,7 @@ namespace Awesome9\Templates;
  * @param  string $name    Template name.
  * @param  array  $vars    Tempalte variables. Default: empty.
  */
-function template( $storage, $name, $vars = array() ) {
+function template( $storage, $name, $vars = [] ) {
 	( new Template( $storage, $name, $vars ) )->render();
 }
 
@@ -32,6 +32,6 @@ function template( $storage, $name, $vars = array() ) {
  * @param  array  $vars    Tempalte variables. Default: empty.
  * @return string
  */
-function get_template( $storage, $name, $vars = array() ) {
+function get_template( $storage, $name, $vars = [] ) {
 	return ( new Template( $storage, $name, $vars ) )->output();
 }

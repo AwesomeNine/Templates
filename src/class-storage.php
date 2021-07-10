@@ -9,7 +9,7 @@
 
 namespace Awesome9\Templates;
 
-use Awesome9\Templates\Exceptions\StorageException;
+use Awesome9\Templates\Exceptions\Storage_Exception;
 
 /**
  * Storage class
@@ -35,7 +35,7 @@ class Storage {
 	 *
 	 * @var array
 	 */
-	private $storages = array();
+	private $storages = [];
 
 	/**
 	 * Retrieve main Storage instance.
@@ -94,15 +94,15 @@ class Storage {
 	 * @return Storage
 	 */
 	public function set_for_theme( $plugin_folder, $theme_folder ) {
-		$this->storages['templates'] = array(
+		$this->storages['templates'] = [
 			'path' => $this->base_dir . $plugin_folder,
 			'url'  => $this->base_url . $plugin_folder,
-		);
+		];
 
-		$this->storages['theme'] = array(
+		$this->storages['theme'] = [
 			'path' => trailingslashit( get_template_directory() ) . $theme_folder,
 			'url'  => trailingslashit( get_template_directory_uri() ) . $theme_folder,
-		);
+		];
 
 		return $this;
 	}
@@ -112,8 +112,8 @@ class Storage {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws StorageException When storage with given name already exists.
-	 * @throws StorageException When storage base path doesn't exist or is not a dir.
+	 * @throws Storage_Exception When storage with given name already exists.
+	 * @throws Storage_Exception When storage base path doesn't exist or is not a dir.
 	 *
 	 * @param  string $name   Storage reference name.
 	 * @param  string $folder Storage base absolute path.
@@ -121,13 +121,13 @@ class Storage {
 	 */
 	public function add( $name, $folder ) {
 		if ( isset( $this->storages[ $name ] ) ) {
-			throw new StorageException( sprintf( 'Storage %s already exists', $name ) );
+			throw new Storage_Exception( sprintf( 'Storage %s already exists', $name ) );
 		}
 
-		$this->storages[ $name ] = array(
+		$this->storages[ $name ] = [
 			'path' => $this->base_dir . $folder,
 			'url'  => $this->base_url . $folder,
-		);
+		];
 
 		return $this;
 	}
@@ -149,14 +149,14 @@ class Storage {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws StorageException When storage is not found.
+	 * @throws Storage_Exception When storage is not found.
 	 *
 	 * @param  string $name Storage reference name.
 	 * @return string
 	 */
 	public function get_path( $name ) {
 		if ( ! isset( $this->storages[ $name ] ) ) {
-			throw new StorageException( sprintf( 'Storage %s does not exist', $name ) );
+			throw new Storage_Exception( sprintf( 'Storage %s does not exist', $name ) );
 		}
 
 		return $this->storages[ $name ]['path'];
@@ -167,14 +167,14 @@ class Storage {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @throws StorageException When storage is not found.
+	 * @throws Storage_Exception When storage is not found.
 	 *
 	 * @param  string $name Storage reference name.
 	 * @return string
 	 */
 	public function get_url( $name ) {
 		if ( ! isset( $this->storages[ $name ] ) ) {
-			throw new StorageException( sprintf( 'Storage %s does not exist', $name ) );
+			throw new Storage_Exception( sprintf( 'Storage %s does not exist', $name ) );
 		}
 
 		return $this->storages[ $name ]['url'];

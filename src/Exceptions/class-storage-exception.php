@@ -1,6 +1,6 @@
 <?php
 /**
- * StorageException class
+ * Storage exception
  *
  * @since   1.0.0
  * @package Awesome9\Templates
@@ -10,6 +10,6 @@
 namespace Awesome9\Templates\Exceptions;
 
 /**
- * StorageException class
+ * Storage_Exception class
  */
-class StorageException extends \Exception {}
+class Storage_Exception extends \Exception {}
